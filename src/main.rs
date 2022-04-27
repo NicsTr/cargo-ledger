@@ -1,5 +1,5 @@
 use cargo_metadata::Message;
-use clap::Parser;
+use clap::Clap;
 use std::process::{Command, Stdio};
 
 use std::env;
@@ -62,7 +62,7 @@ struct NanosMetadata {
     name: Option<String>,
 }
 
-#[derive(Parser)]
+#[derive(Clap)]
 #[clap(name = "Ledger NanoS load commands")]
 #[clap(version = "0.0")]
 #[clap(about = "Builds the project and emits a JSON manifest for ledgerctl.")]
@@ -72,7 +72,7 @@ struct Cli {
     use_prebuilt: Option<std::path::PathBuf>,
 
     #[clap(long)]
-    #[clap(help = concat!(
+    #[clap(about = concat!(
         "Should the app.hex be placed next to the app.json, or next to the input exe?",
         " ",
         "Typically used with --use-prebuilt when the input exe is in a read-only location.",
@@ -83,7 +83,7 @@ struct Cli {
     command: Option<SubCommand>,
 }
 
-#[derive(Parser)]
+#[derive(Clap)]
 enum SubCommand {
     /// Load the app onto a nano
     Load,
